@@ -1,20 +1,25 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 <HEAD>
-	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html/js; charset=windows-1252">
-	<TITLE>jeu 9cases</TITLE>
+	<!--<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html/js; charset=windows-1252">-->
 	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<TITLE>jeu 9cases</TITLE>
+
+<!-- ******************** STYLE *********************************-->
+
 <style>
 body {
-font-family : Verdana,Aial,Helvetica,geneva,Sans-serif ; position: relative ; font-size: 12px; margin : 0px ; padding: 0px ;
+font-family : DejaVu,Noto,Verdana,Aial,Helvetica,Sans-serif ; position: relative ; font-size: 12px; margin : 0px ; padding: 0px ;
 text-align:center ;
 background-color: rgb(220,210,220) ; background-repeat: no-repeat ; background-position: top center ;
 }
 form { font-family : Arial; color : green ; font-size : 22px ; z-index : 1 ; opacity : 1 ;
 }
-canvas {position: absolute; left: 120px; top: 20px; ; z-index: 0 ; width: 1350px ; height: 900px ; 
+canvas {position: absolute; left: 120px; top: 80px; ; z-index: 0 ; width: 1350px ; height: 900px ; 
 }
-div#case0 {font-size: 10px; position: absolute; left: 220px; top: 110px; }
+div#case0 {font-size: 10px; position: absolute; left: 220px; top: 140px; }
 .bouton  {width: 450px; height: 300px ; opacity : 0}
 
 div#case1 {font-size: 18px; position: absolute; left: 0px; top: 0px; }
@@ -26,28 +31,40 @@ div#case6 {font-size: 18px; position: absolute; left: 900px; top: 300px; }
 div#case7 {font-size: 18px; position: absolute; left: 0px; top: 600px; }
 div#case8 {font-size: 18px; position: absolute; left: 450px; top: 600px; }
 div#case9 {font-size: 18px; position: absolute; left: 900px; top: 600px; }
-
 </style>
+
+<!-- ********************** FIN STYLE *********************************-->
 
 </HEAD>
 
+
+<!-- ************************** BODY *********************************-->
+
 <body onload="result()">
 
-<SCRIPT LANGUAGE="JAVASCRIPT">
+<canvas id="canvas" width="1350" height= "900" > </canvas>		
 
-var xcase1=1 ; var xcase2=2 ; var xcase3=3 ; var xcase4=4 ; var xcase5=5 ; var xcase6=6 ; var xcase7=7 ; var xcase8=8 ; var xcase9=0 ;
-var chois1=0 ; var chois2=0 ; var chois3=0 ; var chois4=0 ; var chois5=0 ; var chois6=0 ; var chois7=0 ; var chois8=0 ; var chois9=0 ;
-var xnumber=Math.round(Math.random()*81);
-var somm=0 ; var poin=0 ;
-var numim=1 ;	//choix de la photo support (de 1 à 5) ; initialisation à 1
+<!-- Titre du jeu = Jeu de Taquin-->
+	<div style= "position: relative ; top: 80px ; left: 720px ; font-size: 50px; "> Jeu de Taquin</div>
 
-</SCRIPT>
+<!-- Accès aux miniatures de choix de l'image  -->
+	<a href="javascript:visibdiv();"><img id="miniature" src="photaq1.jpg" style= "position: absolute ; top: 800px ; left: 1600px ; width: 140px ; height: 105px ; "></a>
+	<div id="grille" style="display:none; position: absolute ; top: 500px ; left: 900px ; width: 630px ; height: 200px ; z-index: 4 ; border: 1px solid black ; background-color:#FFF ; ">
+		<p  style= "font-size: 20px; text-align: center ; position: relative ; ">CHOISIR UNE IMAGE SUPPORT</p>
+		<img id="vignet1" src="photaq1.jpg" style= "position: relative ; top: 20px ; left: -40px ; width: 100px ; height: 75px ; "  onClick="clicvign(1)">
+		<img id="vignet2" src="photaq2.jpg" style= "position: relative ; top: 20px ; left: -20px ; width: 100px ; height: 75px ; "  onClick="clicvign(2)">
+		<img id="vignet3" src="photaq3.jpg" style= "position: relative ; top: 20px ; left:  0px ; width: 100px ; height: 75px ; "  onClick="clicvign(3)">
+		<img id="vignet4" src="photaq4.jpg" style= "position: relative ; top: 20px ; left: 20px ; width: 100px ; height: 75px ; "  onClick="clicvign(4)">
+		<img id="vignet5" src="photaq5.jpg" style= "position: relative ; top: 20px ; left: 40px ; width: 100px ; height: 75px ; "  onClick="clicvign(5)">
+	</div>
 
-<form name="jeu1" style= "position: absolute ; top: -20px ; left: 180px ";>
+	
 
+<form name="jeu1" style= "position: absolute ; top: 100px ; left: 180px ";>
 	<div id="case0">
-	<P style= "position: relative ; top: 0px ; left: 1200px " > <INPUT TYPE=TEXT NAME="point" VALUE=" - -" size="2" style= "font-size: 20px; text-align: center; ">		<!-- Affichage du nombre de coups  -->
-	<FORM ACTION="index.html" METHOD="get"> <input type="submit" value="Relancer"  style= "position: relative ; top: 50px ; font-size: 25px; "> </p> 					<!-- Lancement d'un nouveau jeu  -->
+	<!--  Bouton Relancer-->
+	<P style= "position: relative ; top: -40px ; left: 1200px " > <INPUT TYPE=TEXT NAME="point" VALUE=" - -" size="2" style= "font-size: 20px; text-align: center; ">		<!-- Affichage du nombre de coups  -->
+	<FORM ACTION="index.html" METHOD="get"> <input type="submit" value="Relancer"  style= "position: relative ; top: 50px ; font-size: 34px; "> </p> 					<!-- Lancement d'un nouveau jeu  -->
 	</div>
  
 	<div id="case1"> <P><INPUT class="bouton" TYPE=BUTTON NAME="PushButton1" VALUE=""  onclick="doc1()"></p> </div>
@@ -62,7 +79,34 @@ var numim=1 ;	//choix de la photo support (de 1 à 5) ; initialisation à 1
 </form>
 
 
+<!--  Règle du jeu  -->
+<div style= "position: relative ; top: 380px ; left: 1520px ; width: 380px ; height: 150px ; font-size: 18px; text-align: left;">
+	<b>Règle du jeu</b><br/>Le jeu de taquin consiste à recrer une image à partir de ses constituants rangés dans le désordre.<br/>
+	Le jeu comporte une grille de 3x3 cellules dont une est remplacée par un trou (zone grisée).<br/>
+	On reconstitue l'image par enchaînement de glissements de cellules vers le trou.<br/>
+	On peut choisir la photo en cliquant sur la miniature ci-dessous.
+</div>
+
+
+<!--  rectangle trou  -->
+<div id="rect1" style="position: relative; left: 121px; top: -39px; width: 447px; height: 297px; background-color: grey; opacity: 0.9 ; font-size: 28px ; ">Espace vide mouvant</div>
+
+<!-- ************************** FIN BODY (contenu)  **************************-->
+
+
+<!-- ************************** SCRIPT ***************************************-->
+
 <SCRIPT LANGUAGE="JAVASCRIPT">
+
+var xcase1=1 ; var xcase2=2 ; var xcase3=3 ; var xcase4=4 ; var xcase5=5 ; var xcase6=6 ; var xcase7=7 ; var xcase8=8 ; var xcase9=0 ;
+var chois1=0 ; var chois2=0 ; var chois3=0 ; var chois4=0 ; var chois5=0 ; var chois6=0 ; var chois7=0 ; var chois8=0 ; var chois9=0 ;
+var xnumber=Math.round(Math.random()*81);
+var somm=0 ; var poin=0 ;
+var numim=1 ;	//choix de la photo support (de 1 à 5) ; initialisation à 1
+
+var trou=1 ; // identifie le trou valeur 1 à 9
+var xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
+var ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
 
 do {
 	if (xcase1==0) {
@@ -121,6 +165,7 @@ do {
 
  } while(xnumber < 101);
 
+
  document.forms.jeu1.PushButton1.value = xcase1;
  document.forms.jeu1.PushButton2.value = xcase2;
  document.forms.jeu1.PushButton3.value = xcase3;
@@ -132,6 +177,18 @@ do {
  document.forms.jeu1.PushButton9.value = xcase9;
  result();
 
+
+ //identification de l'emplacement du trou au lancement et positionnement du panneau sur le trou
+tabxcase = [xcase1,xcase2,xcase3,xcase4,xcase5,xcase6,xcase7,xcase8,xcase9] ;
+for (i=1;i<10;i++) {if(tabxcase[i-1]==0) trou = i} ;
+
+// positionnement initial du panneau trou 
+xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
+document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
+document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
+
+
 function doc1()
 {
 	var case1 = Number(document.forms.jeu1.PushButton1.value);
@@ -142,14 +199,22 @@ function doc1()
 		document.forms.jeu1.PushButton1.value = case2;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 1 ;
 		}
-
 	if (case4==0) {
 		document.forms.jeu1.PushButton1.value = case4;
 		document.forms.jeu1.PushButton4.value = case1;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 1 ;
 		}
+
+
+	// positionnement du panneau trou    ici pour doc1, mais idem pour les autres
+	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
+	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
+	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
 }
 
 function doc2()
@@ -163,19 +228,28 @@ function doc2()
 		document.forms.jeu1.PushButton1.value = case2;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 2 ;
 		}
 	if (case3==0) {
 		document.forms.jeu1.PushButton3.value = case2;
 		document.forms.jeu1.PushButton2.value = case3;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 2 ;
 		}
 	if (case5==0) {
 		document.forms.jeu1.PushButton5.value = case2;
 		document.forms.jeu1.PushButton2.value = case5;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 2 ;
 		}
+		
+	
+	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
+	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
+	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
 }
 
 function doc3()
@@ -188,13 +262,21 @@ function doc3()
 		document.forms.jeu1.PushButton3.value = case2;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 3 ;
 		}
 	if (case6==0) {
 		document.forms.jeu1.PushButton3.value = case6;
 		document.forms.jeu1.PushButton6.value = case3;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 3 ;
 		}
+		
+	
+	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
+	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
+	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
 }
 
 function doc4()
@@ -208,19 +290,27 @@ function doc4()
 		document.forms.jeu1.PushButton1.value = case4;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 4 ;
 		}
 	if (case7==0) {
 		document.forms.jeu1.PushButton4.value = case7;
 		document.forms.jeu1.PushButton7.value = case4;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 4 ;
 		}
  	if (case5==0) {
 		document.forms.jeu1.PushButton4.value = case5;
 		document.forms.jeu1.PushButton5.value = case4;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 4 ;
 		}
+	
+	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
+	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
+	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
 }
 
 function doc5()
@@ -235,25 +325,34 @@ function doc5()
 		document.forms.jeu1.PushButton2.value = case5;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 5 ;
 		}
 	if (case4==0) {
 		document.forms.jeu1.PushButton5.value = case4;
 		document.forms.jeu1.PushButton4.value = case5;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 5 ;
 		}
  	if (case6==0) {
 		document.forms.jeu1.PushButton5.value = case6;
 		document.forms.jeu1.PushButton6.value = case5;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 5 ;
 		}
 	if (case8==0) {
 		document.forms.jeu1.PushButton5.value = case8;
 		document.forms.jeu1.PushButton8.value = case5;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 5 ;
 		}
+	
+	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
+	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
+	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
 }
 
 function doc6()
@@ -267,19 +366,27 @@ function doc6()
 		document.forms.jeu1.PushButton3.value = case6;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 6 ;
 		}
 	if (case5==0) {
 		document.forms.jeu1.PushButton6.value = case5;
 		document.forms.jeu1.PushButton5.value = case6;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 6 ;
 		}
  	if (case9==0) {
 		document.forms.jeu1.PushButton6.value = case9;
 		document.forms.jeu1.PushButton9.value = case6;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 6 ;
 		}
+	
+	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
+	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
+	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
 }
 
 function doc7()
@@ -292,13 +399,20 @@ function doc7()
 		document.forms.jeu1.PushButton4.value = case7;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 7 ;
 		}
 	if (case8==0) {
 		document.forms.jeu1.PushButton7.value = case8;
 		document.forms.jeu1.PushButton8.value = case7;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 7 ;
 		}
+	
+	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
+	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
+	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
 }
 
 function doc8()
@@ -312,19 +426,27 @@ function doc8()
 		document.forms.jeu1.PushButton5.value = case8;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 8 ;
 		}
 	if (case7==0) {
 		document.forms.jeu1.PushButton8.value = case7;
 		document.forms.jeu1.PushButton7.value = case8;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 8 ;
 		}
 	if (case9==0) {
 		document.forms.jeu1.PushButton8.value = case9;
 		document.forms.jeu1.PushButton9.value = case8;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 8 ;
 		}
+		
+	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
+	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
+	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
 }
 
 function doc9()
@@ -337,13 +459,20 @@ function doc9()
 		document.forms.jeu1.PushButton6.value = case9;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 9 ;
 		}
 	if (case8==0) {
 		document.forms.jeu1.PushButton9.value = case8;
 		document.forms.jeu1.PushButton8.value = case9;
 		document.forms.jeu1.point.value = ++poin;
 		result();
+		trou = 9 ;
 		}
+		
+	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
+	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
+	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
 }
 
 function result()
@@ -411,21 +540,6 @@ function clicvign(nvign)
  
 </SCRIPT>
 
-<canvas id="canvas" width="1350" height= "900" > </canvas>
-
-				
-	<a href="javascript:visibdiv();"><img id="miniature" src="photaq1.jpg" style= "position: absolute ; top: 700px ; left: 1600px ; width: 140px ; height: 105px ; "></a>
-	<div id="grille" style="display:none; position: absolute ; top: 500px ; left: 900px ; width: 630px ; height: 200px ; z-index: 4 ; border: 1px solid black ; background-color:#FFF ; ">
-		<p  style= "font-size: 20px; text-align: center ; position: relative ; ">CHOISIR UNE IMAGE SUPPORT</p>
-		<img id="vignet1" src="photaq1.jpg" style= "position: relative ; top: 20px ; left: -40px ; width: 100px ; height: 75px ; "  onClick="clicvign(1)">
-		<img id="vignet2" src="photaq2.jpg" style= "position: relative ; top: 20px ; left: -20px ; width: 100px ; height: 75px ; "  onClick="clicvign(2)">
-		<img id="vignet3" src="photaq3.jpg" style= "position: relative ; top: 20px ; left:  0px ; width: 100px ; height: 75px ; "  onClick="clicvign(3)">
-		<img id="vignet4" src="photaq4.jpg" style= "position: relative ; top: 20px ; left: 20px ; width: 100px ; height: 75px ; "  onClick="clicvign(4)">
-		<img id="vignet5" src="photaq5.jpg" style= "position: relative ; top: 20px ; left: 40px ; width: 100px ; height: 75px ; "  onClick="clicvign(5)">
-		
-	</div>
-
 </body>
 </html>
-
 
