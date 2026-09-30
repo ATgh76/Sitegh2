@@ -45,31 +45,29 @@ div#case9 {font-size: 18px; position: absolute; left: 900px; top: 600px; }
 <canvas id="canvas" width="1350" height= "900" > </canvas>		
 
 <!-- Titre du jeu = Jeu de Taquin-->
-	<div style= "position: relative ; top: 100px ; left: 680px ; font-size: 60px; color: darkgreen;"> Jeu de Taquin</div>
+<div style= "position: relative ; top: 100px ; left: 680px ; font-size: 60px; color: darkgreen;"> Jeu de Taquin</div>
 
 <!-- Accès aux miniatures de choix de l'image  -->
-	<a href="javascript:visibdiv();"><img id="miniature" src="photaq1.jpg" style= "position: absolute ; top: 860px ; left: 1580px ; width: 140px ; height: 105px ; "></a>
-	<div id="grille" style="display:none; position: absolute ; top: 500px ; left: 900px ; width: 630px ; height: 200px ; z-index: 4 ; border: 1px solid black ; background-color:#FFF ; ">
-		<p  style= "font-size: 20px; text-align: center ; position: relative ; ">CHOISIR UNE IMAGE SUPPORT</p>
-		<img id="vignet1" src="photaq1.jpg" style= "position: relative ; top: 20px ; left: -40px ; width: 100px ; height: 75px ; "  onClick="clicvign(1)">
-		<img id="vignet2" src="photaq2.jpg" style= "position: relative ; top: 20px ; left: -20px ; width: 100px ; height: 75px ; "  onClick="clicvign(2)">
-		<img id="vignet3" src="photaq3.jpg" style= "position: relative ; top: 20px ; left:  0px ; width: 100px ; height: 75px ; "  onClick="clicvign(3)">
-		<img id="vignet4" src="photaq4.jpg" style= "position: relative ; top: 20px ; left: 20px ; width: 100px ; height: 75px ; "  onClick="clicvign(4)">
-		<img id="vignet5" src="photaq5.jpg" style= "position: relative ; top: 20px ; left: 40px ; width: 100px ; height: 75px ; "  onClick="clicvign(5)">
-	</div>
+<a href="javascript:visibdiv();"><img id="miniature" src="photaq1.jpg" style= "position: absolute ; top: 860px ; left: 1580px ; width: 140px ; height: 105px ; "></a>
+<div id="grille" style="display:none; position: absolute ; top: 500px ; left: 900px ; width: 630px ; height: 200px ; z-index: 4 ; border: 1px solid black ; background-color:#FFF ; ">
+	<p  style= "font-size: 20px; text-align: center ; position: relative ; ">CHOISIR UNE IMAGE SUPPORT</p>
+	<img id="vignet1" src="photaq1.jpg" style= "position: relative ; top: 20px ; left: -40px ; width: 100px ; height: 75px ; "  onClick="clicvign(1)">
+	<img id="vignet2" src="photaq2.jpg" style= "position: relative ; top: 20px ; left: -20px ; width: 100px ; height: 75px ; "  onClick="clicvign(2)">
+	<img id="vignet3" src="photaq3.jpg" style= "position: relative ; top: 20px ; left:  0px ; width: 100px ; height: 75px ; "  onClick="clicvign(3)">
+	<img id="vignet4" src="photaq4.jpg" style= "position: relative ; top: 20px ; left: 20px ; width: 100px ; height: 75px ; "  onClick="clicvign(4)">
+	<img id="vignet5" src="photaq5.jpg" style= "position: relative ; top: 20px ; left: 40px ; width: 100px ; height: 75px ; "  onClick="clicvign(5)">
+</div>
 
-	
 
 <form name="jeu1" style= "position: absolute ; top: 100px ; left: 180px ";>
 	<div id="case0">
-	<!--  Cellule comptage de coups ; cette cellule est inutile ; elle est positionnée hors écran-->	
-	<p style= "position: relative ; top: -80px ; left: 1560px " >  <INPUT TYPE=TEXT NAME="point" VALUE=" - -" size="2" style= "font-size: 20px; text-align: center; ">
-	</p>
+		<!--  Cellule comptage de coups ; cette cellule est inutile ; elle est positionnée hors écran-->	
+		<p style= "position: relative ; top: -80px ; left: 1700px " >  <INPUT TYPE=TEXT NAME="point" VALUE=" - -" size="2" style= "font-size: 20px; text-align: center; ">
+		</p>
 
-	<!--  Bouton Relancer nouveau jeu  -->
-	<p  style= "position: relative ; top: -80px ; left: 1300px " >
-	<FORM ACTION="index.html" METHOD="get"> <input type="submit" value="Relancer"  style= "position: relative ; top: 50px ; font-size: 34px; "> </p> 
-
+		<!--  Bouton Relancer nouveau jeu  -->
+		<p  style= "position: relative ; top: -80px ; left: 1300px " >
+		<FORM ACTION="index.html" METHOD="get"> <input type="submit" value="Relancer"  style= "position: relative ; top: 50px ; font-size: 34px; "> </p> 
 	</div>
  
 	<div id="case1"> <P><INPUT class="bouton" TYPE=BUTTON NAME="PushButton1" VALUE=""  onclick="doc1()"></p> </div>
