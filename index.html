@@ -17,7 +17,7 @@ background-color: rgb(220,210,220) ; background-repeat: no-repeat ; background-p
 }
 form { font-family : Arial; color : green ; font-size : 22px ; z-index : 1 ; opacity : 1 ;
 }
-canvas {position: absolute; left: 120px; top: 80px; ; z-index: 0 ; width: 1350px ; height: 900px ; 
+canvas {position: absolute; left: 60px; top: 80px; ; z-index: 0 ; width: 1350px ; height: 900px ; 
 }
 div#case0 {font-size: 10px; position: absolute; left: 220px; top: 140px; }
 .bouton  {width: 450px; height: 300px ; opacity : 0}
@@ -45,10 +45,10 @@ div#case9 {font-size: 18px; position: absolute; left: 900px; top: 600px; }
 <canvas id="canvas" width="1350" height= "900" > </canvas>		
 
 <!-- Titre du jeu = Jeu de Taquin-->
-	<div style= "position: relative ; top: 80px ; left: 720px ; font-size: 50px; "> Jeu de Taquin</div>
+	<div style= "position: relative ; top: 100px ; left: 680px ; font-size: 60px; color: darkgreen;"> Jeu de Taquin</div>
 
 <!-- Accès aux miniatures de choix de l'image  -->
-	<a href="javascript:visibdiv();"><img id="miniature" src="photaq1.jpg" style= "position: absolute ; top: 800px ; left: 1600px ; width: 140px ; height: 105px ; "></a>
+	<a href="javascript:visibdiv();"><img id="miniature" src="photaq1.jpg" style= "position: absolute ; top: 860px ; left: 1580px ; width: 140px ; height: 105px ; "></a>
 	<div id="grille" style="display:none; position: absolute ; top: 500px ; left: 900px ; width: 630px ; height: 200px ; z-index: 4 ; border: 1px solid black ; background-color:#FFF ; ">
 		<p  style= "font-size: 20px; text-align: center ; position: relative ; ">CHOISIR UNE IMAGE SUPPORT</p>
 		<img id="vignet1" src="photaq1.jpg" style= "position: relative ; top: 20px ; left: -40px ; width: 100px ; height: 75px ; "  onClick="clicvign(1)">
@@ -62,9 +62,14 @@ div#case9 {font-size: 18px; position: absolute; left: 900px; top: 600px; }
 
 <form name="jeu1" style= "position: absolute ; top: 100px ; left: 180px ";>
 	<div id="case0">
-	<!--  Bouton Relancer-->
-	<P style= "position: relative ; top: -40px ; left: 1200px " > <INPUT TYPE=TEXT NAME="point" VALUE=" - -" size="2" style= "font-size: 20px; text-align: center; ">		<!-- Affichage du nombre de coups  -->
-	<FORM ACTION="index.html" METHOD="get"> <input type="submit" value="Relancer"  style= "position: relative ; top: 50px ; font-size: 34px; "> </p> 					<!-- Lancement d'un nouveau jeu  -->
+	<!--  Cellule comptage de coups ; cette cellule est inutile ; elle est positionnée hors écran-->	
+	<p style= "position: relative ; top: -80px ; left: 1560px " >  <INPUT TYPE=TEXT NAME="point" VALUE=" - -" size="2" style= "font-size: 20px; text-align: center; ">
+	</p>
+
+	<!--  Bouton Relancer nouveau jeu  -->
+	<p  style= "position: relative ; top: -80px ; left: 1300px " >
+	<FORM ACTION="index.html" METHOD="get"> <input type="submit" value="Relancer"  style= "position: relative ; top: 50px ; font-size: 34px; "> </p> 
+
 	</div>
  
 	<div id="case1"> <P><INPUT class="bouton" TYPE=BUTTON NAME="PushButton1" VALUE=""  onclick="doc1()"></p> </div>
@@ -79,8 +84,11 @@ div#case9 {font-size: 18px; position: absolute; left: 900px; top: 600px; }
 </form>
 
 
+<!--  Panneau partie gagnée  -->
+<div id="gagne" style= "position: relative ; top: 180px ; left: 1420px ; width: 280px ; height: 30px ; font-size: 40px; text-align: center; color: brown ;">Partie gagnée</div>
+
 <!--  Règle du jeu  -->
-<div style= "position: relative ; top: 380px ; left: 1520px ; width: 380px ; height: 150px ; font-size: 18px; text-align: left;">
+<div style= "position: relative ; top: 380px ; left: 1480px ; width: 380px ; height: 150px ; font-size: 18px; text-align: left;">
 	<b>Règle du jeu</b><br/>Le jeu de taquin consiste à recrer une image à partir de ses constituants rangés dans le désordre.<br/>
 	Le jeu comporte une grille de 3x3 cellules dont une est remplacée par un trou (zone grisée).<br/>
 	On reconstitue l'image par enchaînement de glissements de cellules vers le trou.<br/>
@@ -89,7 +97,7 @@ div#case9 {font-size: 18px; position: absolute; left: 900px; top: 600px; }
 
 
 <!--  rectangle trou  -->
-<div id="rect1" style="position: relative; left: 121px; top: -39px; width: 447px; height: 297px; background-color: grey; opacity: 0.9 ; font-size: 28px ; ">Espace vide mouvant</div>
+<div id="rect1" style="position: relative; left: 121px; top: -39px; width: 447px; height: 297px; background-color: grey; opacity: 0.9 ; font-size: 28px ; "><br>Espace vide mouvant</div>
 
 <!-- ************************** FIN BODY (contenu)  **************************-->
 
@@ -163,6 +171,10 @@ do {
 
 	++xnumber;
 
+	// gestion initiale des panneaux
+	document.getElementById("gagne").style.visibility = "hidden";		// masque le panneau Gagné
+	document.getElementById("rect1").style.visibility = "visible";		// le panneau trou est visible
+
  } while(xnumber < 101);
 
 
@@ -184,9 +196,9 @@ for (i=1;i<10;i++) {if(tabxcase[i-1]==0) trou = i} ;
 
 // positionnement initial du panneau trou 
 xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
-document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+document.getElementById("rect1").style.left = (61+xtrou*450) + "px" ;
 ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
-document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
+document.getElementById("rect1").style.top = (-182+ytrou*300) + "px" ;
 
 
 function doc1()
@@ -212,9 +224,9 @@ function doc1()
 
 	// positionnement du panneau trou    ici pour doc1, mais idem pour les autres
 	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
-	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	document.getElementById("rect1").style.left = (61+xtrou*450) + "px" ;
 	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
-	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
+	document.getElementById("rect1").style.top = (-182+ytrou*300) + "px" ;
 }
 
 function doc2()
@@ -247,9 +259,9 @@ function doc2()
 		
 	
 	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
-	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	document.getElementById("rect1").style.left = (61+xtrou*450) + "px" ;
 	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
-	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
+	document.getElementById("rect1").style.top = (-182+ytrou*300) + "px" ;
 }
 
 function doc3()
@@ -274,9 +286,9 @@ function doc3()
 		
 	
 	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
-	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	document.getElementById("rect1").style.left = (61+xtrou*450) + "px" ;
 	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
-	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
+	document.getElementById("rect1").style.top = (-182+ytrou*300) + "px" ;
 }
 
 function doc4()
@@ -308,9 +320,9 @@ function doc4()
 		}
 	
 	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
-	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	document.getElementById("rect1").style.left = (61+xtrou*450) + "px" ;
 	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
-	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
+	document.getElementById("rect1").style.top = (-182+ytrou*300) + "px" ;
 }
 
 function doc5()
@@ -350,9 +362,9 @@ function doc5()
 		}
 	
 	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
-	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	document.getElementById("rect1").style.left = (61+xtrou*450) + "px" ;
 	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
-	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
+	document.getElementById("rect1").style.top = (-182+ytrou*300) + "px" ;
 }
 
 function doc6()
@@ -384,9 +396,9 @@ function doc6()
 		}
 	
 	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
-	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	document.getElementById("rect1").style.left = (61+xtrou*450) + "px" ;
 	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
-	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
+	document.getElementById("rect1").style.top = (-182+ytrou*300) + "px" ;
 }
 
 function doc7()
@@ -410,9 +422,9 @@ function doc7()
 		}
 	
 	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
-	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	document.getElementById("rect1").style.left = (61+xtrou*450) + "px" ;
 	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
-	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
+	document.getElementById("rect1").style.top = (-182+ytrou*300) + "px" ;
 }
 
 function doc8()
@@ -444,9 +456,9 @@ function doc8()
 		}
 		
 	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
-	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	document.getElementById("rect1").style.left = (61+xtrou*450) + "px" ;
 	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
-	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
+	document.getElementById("rect1").style.top = (-182+ytrou*300) + "px" ;
 }
 
 function doc9()
@@ -470,9 +482,9 @@ function doc9()
 		}
 		
 	xtrou = ((trou-1) % 3);					// valeur 0, 1, 2
-	document.getElementById("rect1").style.left = (121+xtrou*450) + "px" ;
+	document.getElementById("rect1").style.left = (61+xtrou*450) + "px" ;
 	ytrou = Math.floor((trou-1) / 3) ;		// valeur 0, 1, 2
-	document.getElementById("rect1").style.top = (-138+ytrou*300) + "px" ;
+	document.getElementById("rect1").style.top = (-182+ytrou*300) + "px" ;
 }
 
 function result()
@@ -496,7 +508,10 @@ function result()
 	if (case7==7) {++somm;}
 	if (case8==8) {++somm;}
 
-	if (somm==8) {alert("Bravo");}
+	// la partie est gagnée ; on masque le panneau trou et on affiche le panneau Gagné
+	if (somm==8) 
+		{document.getElementById("gagne").style.visibility = "visible";		// affiche le panneau Gagné
+		 document.getElementById("rect1").style.visibility = "hidden";	;}	// masque le panneau trou 
 	else { somm=0;}
 
 	if (case1==0) {document.forms.jeu1.PushButton1.value = "";}
